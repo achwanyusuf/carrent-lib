@@ -11,6 +11,13 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### [1.1.1](https://github.com/achwanyusuf/carrent-lib/compare/v1.1.0...v1.1.1) (2024-03-03)
 
+
+### Bug Fixes
+
+* redis location ([19aebfd](https://github.com/achwanyusuf/carrent-lib/commit/19aebfd51c37a7245f042f1e150691f2468ec4c7))
+
+### [1.1.1](https://github.com/achwanyusuf/carrent-lib/compare/v1.1.0...v1.1.1) (2024-03-03)
+
 ## 1.1.0 (2024-03-03)
 
 
