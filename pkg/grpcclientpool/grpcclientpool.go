@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 type CPool struct {
@@ -78,7 +79,7 @@ func (cp *CPool) Get() (*connection, error) {
 }
 
 func (cp *CPool) newConnection() (*connection, error) {
-	conn, err := grpc.Dial(cp.address)
+	conn, err := grpc.Dial(cp.address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}
