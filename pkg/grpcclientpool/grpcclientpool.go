@@ -20,9 +20,9 @@ type CPool struct {
 }
 
 type connection struct {
-	id string
-	p  *CPool
-	c  *grpc.ClientConn
+	id   string
+	p    *CPool
+	Conn *grpc.ClientConn
 }
 
 type qChan struct {
@@ -35,7 +35,7 @@ func (cp *CPool) Release() {
 		for _, val := range cp.idleC {
 			cp.mu.Lock()
 			delete(cp.idleC, val.id)
-			val.c.Close()
+			val.Conn.Close()
 			cp.mu.Unlock()
 		}
 	}
@@ -83,9 +83,9 @@ func (cp *CPool) newConnection() (*connection, error) {
 		return nil, err
 	}
 	return &connection{
-		id: fmt.Sprintf("%v", time.Now().Unix()),
-		p:  cp,
-		c:  conn,
+		id:   fmt.Sprintf("%v", time.Now().Unix()),
+		p:    cp,
+		Conn: conn,
 	}, nil
 }
 
@@ -147,7 +147,7 @@ func (cp *CPool) update(conn *connection) {
 		cp.idleC[conn.id] = conn
 	} else {
 		cp.openCCount--
-		_ = conn.c.Close()
+		_ = conn.Conn.Close()
 	}
 }
 
