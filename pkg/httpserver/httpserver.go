@@ -40,11 +40,12 @@ type HTTPSetting struct {
 }
 
 type Swagger struct {
-	Title       string
-	Description string
-	Version     string
-	Host        string
-	Port        int
+	Title                  string
+	Description            string
+	Version                string
+	Host                   string
+	Port                   int
+	OAuth2PasswordTokenUrl string
 }
 
 func (h *HTTPSetting) NewHTTPServer() *gin.Engine {
@@ -126,8 +127,7 @@ func (h *HTTPSetting) SetSwaggo(docs *swag.Spec) {
 	docs.Host = fmt.Sprintf("%s:%v", h.Swagger.Host, h.Swagger.Port)
 	docs.BasePath = "/api"
 	docs.Schemes = []string{"http"}
-	OAuth2PasswordTokenUrl := fmt.Sprintf("http://%s:%v/api/oauth2", h.Swagger.Host, h.Swagger.Port)
-	docs.SwaggerTemplate = fmt.Sprintf(docs.SwaggerTemplate, OAuth2PasswordTokenUrl)
+	docs.SwaggerTemplate = fmt.Sprintf(docs.SwaggerTemplate, h.Swagger.OAuth2PasswordTokenUrl)
 	ginEngine.GET("/swagger", func(ctx *gin.Context) {
 		ctx.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
 	})
