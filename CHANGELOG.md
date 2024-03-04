@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/achwanyusuf/carrent-lib/compare/v1.2.0...v1.2.1) (2024-03-04)
+
+
+### Bug Fixes
+
+* set mapstructure ([d1360f1](https://github.com/achwanyusuf/carrent-lib/commit/d1360f1abcc9877059173bf830557ccfc5c6e454))
+
 ## [1.2.0](https://github.com/achwanyusuf/carrent-lib/compare/v1.1.0...v1.2.0) (2024-03-04)
 
 
