@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.2](https://github.com/achwanyusuf/carrent-lib/compare/v1.3.1...v1.3.2) (2024-03-04)
+
+
+### Bug Fixes
+
+* add security cred ([280dacd](https://github.com/achwanyusuf/carrent-lib/commit/280dacd706dcd738e2b835fdf8aa54e44226388e))
+
 ### [1.3.1](https://github.com/achwanyusuf/carrent-lib/compare/v1.3.0...v1.3.1) (2024-03-04)
 
 
