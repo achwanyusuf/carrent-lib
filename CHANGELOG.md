@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/achwanyusuf/carrent-lib/compare/v1.2.2...v1.3.0) (2024-03-04)
+
+
+### Features
+
+* create grpc client pool ([ef9b6f4](https://github.com/achwanyusuf/carrent-lib/commit/ef9b6f45420aabbf862b7f412e2811e7c1cb99db))
+
 ### [1.2.2](https://github.com/achwanyusuf/carrent-lib/compare/v1.2.1...v1.2.2) (2024-03-04)
 
 
