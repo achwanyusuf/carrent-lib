@@ -16,6 +16,7 @@ import (
 	"github.com/achwanyusuf/carrent-lib/pkg/common"
 	"github.com/achwanyusuf/carrent-lib/pkg/errormsg"
 	"github.com/achwanyusuf/carrent-lib/pkg/logger"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	swaggerFiles "github.com/swaggo/files"
@@ -89,8 +90,20 @@ func (h *HTTPSetting) middleware() {
 	ginEngine.Use(h.requestLogger())
 	ginEngine.Use(gin.Recovery())
 	ginEngine.Use(h.generateRequestID)
+	ginEngine.Use(AllowAll())
 	h.pprofRouter()
 	h.healthRouter()
+}
+
+func AllowAll() gin.HandlerFunc {
+	cfg := cors.Config{
+		AllowMethods:     []string{"*"},
+		AllowHeaders:     []string{"*"},
+		AllowCredentials: true,
+	}
+
+	cfg.AllowAllOrigins = true
+	return cors.New(cfg)
 }
 
 func (h *HTTPSetting) generateRequestID(c *gin.Context) {
