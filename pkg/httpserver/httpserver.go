@@ -40,12 +40,12 @@ type HTTPSetting struct {
 }
 
 type Swagger struct {
-	Title                  string
-	Description            string
-	Version                string
-	Host                   string
-	Port                   int
-	OAuth2PasswordTokenUrl string
+	Title                  string `mapstructure:"title"`
+	Description            string `mapstructure:"description"`
+	Version                string `mapstructure:"version"`
+	Host                   string `mapstructure:"host"`
+	Port                   int    `mapstructure:"port"`
+	OAuth2PasswordTokenUrl string `mapstructure:"oauth2_password_token_url"`
 }
 
 func (h *HTTPSetting) NewHTTPServer() *gin.Engine {
