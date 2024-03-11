@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/achwanyusuf/carrent-lib/compare/v1.3.2...v1.4.0) (2024-03-11)
+
+
+### Features
+
+* add govalidator ([1f3998d](https://github.com/achwanyusuf/carrent-lib/commit/1f3998d1fdfcd41a9925914f1902fd3fc2ba52e7))
+
 ### [1.3.2](https://github.com/achwanyusuf/carrent-lib/compare/v1.3.1...v1.3.2) (2024-03-04)
 
 
