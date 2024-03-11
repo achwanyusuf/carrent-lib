@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	alphaNumericSpaceRegexString = "^[a-zA-Z0-9]+$"
+	alphaNumericSpaceRegexString = "^[a-zA-Z0-9 ]+$"
 	rfc3339RegexString           = "^(\\d+)-(0[1-9]|1[012])-(0[1-9]|[12]\\d|3[01])T([01]\\d|2[0-3]):([0-5]\\d):([0-5]\\d|60)(\\.\\d+)?(([Zz])|([\\+|\\-]([01]\\d|2[0-3]):([0-5]\\d|59)))$"
 )
 
