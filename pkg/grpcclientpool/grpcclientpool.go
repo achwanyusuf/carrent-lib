@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/insecure"
+	"google.golang.org/grpc/credentials"
 )
 
 type CPool struct {
@@ -16,6 +16,7 @@ type CPool struct {
 	address    string
 	maxOpen    int
 	maxIdle    int
+	credential credentials.TransportCredentials
 	idleC      map[string]*connection
 	openCCount int
 }
@@ -79,7 +80,7 @@ func (cp *CPool) Get() (*connection, error) {
 }
 
 func (cp *CPool) newConnection() (*connection, error) {
-	conn, err := grpc.Dial(cp.address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(cp.address, grpc.WithTransportCredentials(cp.credential))
 	if err != nil {
 		return nil, err
 	}
@@ -157,6 +158,7 @@ type ClientPoolGRPC struct {
 	MaxIdleConnection int    `mapstructure:"max_idle_connection"`
 	QueueTotal        int    `mapstructure:"queue_total"`
 	Address           string `mapstructure:"address"`
+	Credential        credentials.TransportCredentials
 }
 
 func New(c *ClientPoolGRPC) *CPool {
@@ -165,6 +167,7 @@ func New(c *ClientPoolGRPC) *CPool {
 		address:    c.Address,
 		maxOpen:    c.MaxOpenConnection,
 		maxIdle:    c.MaxOpenConnection,
+		credential: c.Credential,
 		openCCount: 0,
 		queue:      make(chan *qChan, c.QueueTotal),
 		idleC:      make(map[string]*connection, 0),
