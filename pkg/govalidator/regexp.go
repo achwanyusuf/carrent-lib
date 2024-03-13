@@ -16,15 +16,15 @@ var (
 	rfc3339Regex           = regexp.MustCompile(rfc3339RegexString)
 )
 
-func isAlphaNumericSpace(fl validator.FieldLevel) bool {
+func IsAlphaNumericSpace(fl validator.FieldLevel) bool {
 	return alphaNumericSpaceRegex.MatchString(fl.Field().String())
 }
 
-func isRFC3339(fl validator.FieldLevel) bool {
+func IsRFC3339(fl validator.FieldLevel) bool {
 	return rfc3339Regex.MatchString(fl.Field().String())
 }
 
 var validators = map[string]func(fl validator.FieldLevel) bool{
-	"alphanumspace": isAlphaNumericSpace,
-	"rfc3339":       isRFC3339,
+	"alphanumspace": IsAlphaNumericSpace,
+	"rfc3339":       IsRFC3339,
 }
