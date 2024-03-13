@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/achwanyusuf/carrent-lib/compare/v1.5.1...v1.6.0) (2024-03-13)
+
+
+### Features
+
+* create regexp ([4868afa](https://github.com/achwanyusuf/carrent-lib/commit/4868afa333618fc0b437f56375eaa3293762516b))
+
 ### [1.5.1](https://github.com/achwanyusuf/carrent-lib/compare/v1.5.0...v1.5.1) (2024-03-13)
 
 
