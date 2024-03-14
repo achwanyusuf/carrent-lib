@@ -35,6 +35,9 @@ type qChan struct {
 type CPoolInterface interface {
 	Release()
 	Get() (*Connection, error)
+	newConnection() (*Connection, error)
+	connectionQueueProccess()
+	update(conn *Connection)
 }
 
 func (cp *CPool) Release() {
