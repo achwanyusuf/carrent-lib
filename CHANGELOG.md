@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/achwanyusuf/carrent-lib/compare/v1.6.0...v1.7.0) (2024-03-14)
+
+
+### Features
+
+* create grpc mock ([fce0616](https://github.com/achwanyusuf/carrent-lib/commit/fce061689028869ed35d559f7887bb0f6be1e150))
+
 ## [1.6.0](https://github.com/achwanyusuf/carrent-lib/compare/v1.5.1...v1.6.0) (2024-03-13)
 
 
