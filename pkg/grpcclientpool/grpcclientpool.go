@@ -17,19 +17,24 @@ type CPool struct {
 	maxOpen    int
 	maxIdle    int
 	credential credentials.TransportCredentials
-	idleC      map[string]*connection
+	idleC      map[string]*Connection
 	openCCount int
 }
 
-type connection struct {
+type Connection struct {
 	id   string
 	p    *CPool
 	Conn *grpc.ClientConn
 }
 
 type qChan struct {
-	c chan *connection
+	c chan *Connection
 	e chan error
+}
+
+type CPoolInterface interface {
+	Release()
+	Get() (*Connection, error)
 }
 
 func (cp *CPool) Release() {
@@ -43,7 +48,7 @@ func (cp *CPool) Release() {
 	}
 }
 
-func (cp *CPool) Get() (*connection, error) {
+func (cp *CPool) Get() (*Connection, error) {
 	cp.mu.Lock()
 	if len(cp.idleC) > 0 {
 		for _, val := range cp.idleC {
@@ -55,7 +60,7 @@ func (cp *CPool) Get() (*connection, error) {
 	}
 	if cp.openCCount >= cp.maxOpen {
 		qr := &qChan{
-			c: make(chan *connection),
+			c: make(chan *Connection),
 			e: make(chan error),
 		}
 		cp.queue <- qr
@@ -79,12 +84,12 @@ func (cp *CPool) Get() (*connection, error) {
 	return conn, nil
 }
 
-func (cp *CPool) newConnection() (*connection, error) {
+func (cp *CPool) newConnection() (*Connection, error) {
 	conn, err := grpc.Dial(cp.address, grpc.WithTransportCredentials(cp.credential))
 	if err != nil {
 		return nil, err
 	}
-	return &connection{
+	return &Connection{
 		id:   fmt.Sprintf("%v", time.Now().Unix()),
 		p:    cp,
 		Conn: conn,
@@ -138,11 +143,11 @@ func (cp *CPool) connectionQueueProccess() {
 	}
 }
 
-func (c *connection) Release() {
+func (c *Connection) Release() {
 	c.p.update(c)
 }
 
-func (cp *CPool) update(conn *connection) {
+func (cp *CPool) update(conn *Connection) {
 	cp.mu.Lock()
 	defer cp.mu.Unlock()
 	if cp.maxIdle >= len(cp.idleC) {
@@ -161,7 +166,7 @@ type ClientPoolGRPC struct {
 	Credential        credentials.TransportCredentials
 }
 
-func New(c *ClientPoolGRPC) *CPool {
+func New(c *ClientPoolGRPC) CPoolInterface {
 	clientPool := &CPool{
 		mu:         sync.Mutex{},
 		address:    c.Address,
@@ -170,7 +175,7 @@ func New(c *ClientPoolGRPC) *CPool {
 		credential: c.Credential,
 		openCCount: 0,
 		queue:      make(chan *qChan, c.QueueTotal),
-		idleC:      make(map[string]*connection, 0),
+		idleC:      make(map[string]*Connection, 0),
 	}
 	go clientPool.connectionQueueProccess()
 	return clientPool

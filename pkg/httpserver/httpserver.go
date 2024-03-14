@@ -202,7 +202,6 @@ func (h *HTTPSetting) requestLogger() gin.HandlerFunc {
 		h.Log.Info(ctx, string(reqStr))
 		blw := &bodyLogWriter{body: bytes.NewBufferString(""), ResponseWriter: ctx.Writer}
 		ctx.Writer = blw
-		ctx.Next()
 
 		latency := time.Since(start)
 
@@ -217,6 +216,7 @@ func (h *HTTPSetting) requestLogger() gin.HandlerFunc {
 		} else {
 			h.Log.Info(ctx, string(resStr))
 		}
+		ctx.Next()
 	}
 }
 
