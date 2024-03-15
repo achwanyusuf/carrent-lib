@@ -9,8 +9,13 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func Migrate(db *sql.DB, path string, isUp bool) error {
-	driver, err := postgres.WithInstance(db, &postgres.Config{})
+func Migrate(db *sql.DB, path string, isUp bool, migrationTable string) error {
+	if migrationTable == "" {
+		migrationTable = "schema_migrations"
+	}
+	driver, err := postgres.WithInstance(db, &postgres.Config{
+		MigrationsTable: migrationTable,
+	})
 	if err != nil {
 		return err
 	}
