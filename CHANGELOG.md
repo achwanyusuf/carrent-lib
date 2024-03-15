@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/achwanyusuf/carrent-lib/compare/v1.7.1...v1.8.0) (2024-03-15)
+
+
+### Features
+
+* set migration schema ([62a1810](https://github.com/achwanyusuf/carrent-lib/commit/62a1810371ed57282e8db23ba23067528b2fc31a))
+
 ### [1.7.1](https://github.com/achwanyusuf/carrent-lib/compare/v1.7.0...v1.7.1) (2024-03-14)
 
 
